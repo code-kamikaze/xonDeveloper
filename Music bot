@@ -1,0 +1,28 @@
+index.js: const Monitor = require('ping-monitor');
+const keepAlive = require('./server');
+keepAlive();
+const monitor = new Monitor({
+    website: 'https://sombras-2.markox36.repl.co',
+    title: 'Secundario',
+    interval: 15 // minutes
+});
+////////Monitor//////////
+monitor.on('up', (res) => console.log(`${res.website} está encedido.`));
+monitor.on('down', (res) => console.log(`${res.website} se ha caído - ${res.statusMessage}`));
+monitor.on('stop', (website) => console.log(`${website} se ha parado.`) );
+monitor.on('error', (error) => console.log(error));
+//////////////////////
+server.js: 
+const express = require('express')
+const server = express();
+
+server.all('/', (req, res) => {
+    res.send('El bot sigue encendido.');
+});
+ 
+module.exports = () => {
+    server.listen(3000, () => {
+        console.log('Servidor Listo.');
+    });
+    return true;
+}
