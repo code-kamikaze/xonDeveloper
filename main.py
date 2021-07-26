@@ -14,3 +14,6 @@ async def ping(ctx):
     async with ctx.typing():
         await asyncio.sleep(0.5)
     await ctx.send(f'Pong! {round(client.latency * 100)}ms')
+    
+if __name__ == "__main__":
+    client.run('token')
